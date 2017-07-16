@@ -14,6 +14,9 @@ import {
   } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
+import { Navigator } from 'react-native-deprecated-custom-components';
+import Boy from './Boy.js';
+
 
 export default class imooc_gp extends Component {
   constructor(props){
@@ -25,45 +28,55 @@ export default class imooc_gp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TabNavigator>
+        {/*<TabNavigator>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'tb_popular'}
             title="最热"
-            selectedTitleStyle ={{color:'red'}}
+            selectedTitleStyle ={{color:'#1495f0'}}
             renderIcon={() => <Image style={styles.image} source={require('./res/images/ic_polular.png')} />}
-            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'red'}]} source={require('./res/images/ic_polular.png')} />}
-            badgeText="1"
+            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'#1495f0'}]} source={require('./res/images/ic_polular.png')} />}
+            badgeText="3"
             onPress={() => this.setState({ selectedTab: 'tb_popular' })}>
             <View style={styles.page1}></View>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'tb_trending'}
             title="趋势"
-            selectedTitleStyle ={{color:'yellow'}}
+            selectedTitleStyle ={{color:'#1495f0'}}
             renderIcon={() => <Image style={styles.image} source={require('./res/images/ic_trending.png')} />}
-            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'yellow'}]} source={require('./res/images/ic_trending.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'#1495f0'}]} source={require('./res/images/ic_trending.png')} />}
             onPress={() => this.setState({ selectedTab: 'tb_trending' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'tb_favorite'}
             title="收藏"
-            selectedTitleStyle ={{color:'yellow'}}
+            selectedTitleStyle ={{color:'#1495f0'}}
             renderIcon={() => <Image style={styles.image} source={require('./res/images/ic_favorite.png')} />}
-            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'yellow'}]} source={require('./res/images/ic_favorite.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'#1495f0'}]} source={require('./res/images/ic_favorite.png')} />}
             onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'tb_my'}
             title="我的"
-            selectedTitleStyle ={{color:'yellow'}}
+            selectedTitleStyle ={{color:'#1495f0'}}
             renderIcon={() => <Image style={styles.image} source={require('./res/images/ic_my.png')} />}
-            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'yellow'}]} source={require('./res/images/ic_my.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'#1495f0'}]} source={require('./res/images/ic_my.png')} />}
             onPress={() => this.setState({ selectedTab: 'tb_my' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
-        </TabNavigator>
+        </TabNavigator>*/}
+        <Navigator
+          initialRoute={{
+            component:Boy
+          }}
+          renderScene={(route,navigator)=>{
+            let Component = route.component;
+            return <Component navigator={navigator} {...route.params} />
+          }}
+          >
+        </Navigator>
       </View>
     );
   }

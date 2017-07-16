@@ -11,27 +11,28 @@ import {
   Image,
   Text,
   View
-} from 'react-native';
+  } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
 
 export default class imooc_gp extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      selectedTab:'home',
+    this.state = {
+      selectedTab: 'home',
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
         <TabNavigator>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
-            title="Home"
+            title=""
             renderIcon={() => <Image source={require('./res/images/ic_polular.png')} />}
             renderSelectedIcon={() => <Image source={require('./res/images/ic_polular.png')} />}
-            badgeText="1"
+            badgeText={2}
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <View style={styles.page1}></View>
           </TabNavigator.Item>
@@ -56,13 +57,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  page1:{
-    flex:1,
-    backgroundColor:'red'
+  page1: {
+    flex: 1,
+    backgroundColor: 'red'
   },
-  page2:{
-    flex:1,
-    backgroundColor:'yellow'
+  page2: {
+    flex: 1,
+    backgroundColor: 'yellow'
   }
 });
 
