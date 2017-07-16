@@ -1,7 +1,8 @@
 /**
  * Created by think on 2017/7/16.
  */
-import React,{Component,PropTypes} from 'React';
+import React,{Component} from 'React';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -16,7 +17,7 @@ const NAV_BAR_HEIGHT_IOS = 44;
 const STATUS_BAR_HEIGHT = 20;
 const StatusBarShape={
   backgroundColor:PropTypes.string,
-  barStyle:PropTypes.oneOf('default', 'light-content', 'dark-content'),
+  barStyle:PropTypes.oneOf(['default', 'light-content', 'dark-content']),
   hidden:PropTypes.bool
 }
 export default class NavigationBar extends Component {
@@ -57,7 +58,8 @@ export default class NavigationBar extends Component {
       {this.props.rightButton}
     </View>;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,this.props.style]}>
+        {status}
         {content}
       </View>
     )
@@ -72,7 +74,6 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignItems:'center',
     height:Platform.OS ==='ios'?NAV_BAR_HEIGHT_IOS:NAV_BAR_HEIGHT_ANDROID,
-    backgroundColor:'red',
     flexDirection:'row',
   },
   titleViewContainer:{

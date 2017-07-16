@@ -5,19 +5,51 @@ import React,{Component} from 'React';
 import {
   View,
   Text,
+  TouchableOpacity,
+  Image,
   StyleSheet
   } from 'react-native';
 
-export default class Girl extends Component{
-  constructor(props){
+import NavigationBar from './NavigationBar';
+
+export default class Girl extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      word:''
+    this.state = {
+      word: ''
     }
   }
-  render(){
-    return(
+
+  renderButton(image) {
+    return (
+      <TouchableOpacity
+        onPress={()=>{
+          this.props.navigator.pop();
+        }}
+        >
+        <Image
+          style={[styles.button,{tintColor:'#fff'}]}
+          source={image}
+          />
+      </TouchableOpacity>
+    )
+  }
+
+  render() {
+    return (
       <View style={styles.container}>
+        <NavigationBar
+          title="Girl"
+          style={{
+            backgroundColor:'#EE6363'
+          }}
+          leftButton={
+            this.renderButton(require('./res/images/ic_arrow_back_white_36pt.png'))
+          }
+          rightButton={
+            this.renderButton(require('./res/images/ic_favorite.png'))
+          }
+          />
         <Text style={styles.text}>I am girl</Text>
         <Text style={styles.text}>我收到了男孩送的：{this.props.word}</Text>
         <Text
@@ -34,12 +66,16 @@ export default class Girl extends Component{
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor:'red',
-    justifyContent:'center'
+  container: {
+    flex: 1,
+    backgroundColor:'#fff'
   },
-  text:{
-    fontSize:20
+  text: {
+    fontSize: 20
+  },
+  button: {
+    width: 22,
+    height: 22,
+    margin: 10,
   }
 })
