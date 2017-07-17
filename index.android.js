@@ -10,13 +10,14 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  ListView
   } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
 import { Navigator } from 'react-native-deprecated-custom-components';
 import Boy from './Boy.js';
-
+import ListViewTest from './ListViewTest';
 
 export default class imooc_gp extends Component {
   constructor(props){
@@ -66,7 +67,7 @@ export default class imooc_gp extends Component {
             onPress={() => this.setState({ selectedTab: 'tb_my' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
-        </TabNavigator>*/}
+        </TabNavigator>
         <Navigator
           initialRoute={{
             component:Boy
@@ -76,7 +77,8 @@ export default class imooc_gp extends Component {
             return <Component navigator={navigator} {...route.params} />
           }}
           >
-        </Navigator>
+        </Navigator>*/}
+        <ListViewTest />
       </View>
     );
   }
