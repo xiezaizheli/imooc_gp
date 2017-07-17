@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignItems:'center',
     height:Platform.OS ==='ios'?NAV_BAR_HEIGHT_IOS:NAV_BAR_HEIGHT_ANDROID,
-    flexDirection:'row',
+    flexDirection:'row'
   },
   titleViewContainer:{
     justifyContent:'center',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     left:40,
     right:40,
     top:0,
-    bottom:0,
+    bottom:0
   },
   title:{
     fontSize:20,
