@@ -7,12 +7,14 @@ import {
   Text,
   TextInput,
   ListView,
+  RefreshControl,
   StyleSheet,
 } from 'react-native'
 import NavigationBar from '../common/NavigationBar';
 import DataRepository from '../expand/dao/DataRepository';
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
 import ListViewTest from "../../ListViewTest";
+import RepositoryCell from '../common/RepositoryCell';
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=stars';
 
@@ -49,9 +51,16 @@ export default class PopularPage extends Component {
       <View style={styles.container}>
         <NavigationBar
           title='最热'
-          style={{backgroundColor: '#6495ED'}}
+          statusBar={{
+            backgroundColor:'#2196F3'
+          }}
         />
-        <ScrollableTabView>
+        <ScrollableTabView
+          tabBarBackgroundColor="#2196F3"
+          tabBarInactiveTextColor="mintcream"
+          tabBarActiveTextColor="#fff"
+          tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
+        >
           <PopularTab tabLabel="java">JAVA</PopularTab>
           <PopularTab tabLabel="ios">ios</PopularTab>
           <PopularTab tabLabel="android">android</PopularTab>
@@ -65,16 +74,19 @@ class PopularTab extends Component {
     super(props);
     this.dataRepository = new DataRepository();
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      isLoading:false
     }
   }
 
   loadData() {
+    this.setState({isLoading:true})
     let url = URL + this.props.tabLabel + QUERY_STR;
     this.dataRepository.fetchNetRepository(url)
       .then(result => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(result.items)
+          dataSource: this.state.dataSource.cloneWithRows(result.items),
+          isLoading:false
         })
       })
       .catch(error => {
@@ -87,22 +99,25 @@ class PopularTab extends Component {
   }
 
   renderRow(data) {
-    return (
-      <View style={{margin:10}}>
-        <Text>{data.full_name}</Text>
-        <Text>{data.description}</Text>
-        <Text>{data.owner.avatar_url}</Text>
-        <Text>{data.stargazers_count}</Text>
-      </View>
-    )
+    return <RepositoryCell data={data} />
   }
 
   render() {
     return (
-      <View>
+      <View style={{flex:1}}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(data) => this.renderRow(data)}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isLoading}
+              onRefresh={this.loadData()}
+              colors={['#2196f3']}
+              tintColor ={'#2196f3'}
+              title="Loading..."
+              titleColor={'#2196f3'}
+            />
+          }
         />
       </View>
     )
